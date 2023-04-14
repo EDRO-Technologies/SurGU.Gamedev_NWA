@@ -5,17 +5,23 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private float pedals;
     private float throttle;
+    private float yaw;
+    private Vector2 pitchNRoll;
 
-    public float Pedals { get => pedals; }
     public float Throttle { get => throttle; }
-
-    private void OnPedals(InputValue value) {
-        pedals = value.Get<float>();
-    }
+    public float Yaw { get => yaw; }
+    public Vector2 PitchNRoll { get => pitchNRoll; }
 
     private void OnThrottle(InputValue value) {
         throttle = value.Get<float>();
+    }
+
+    private void OnYaw(InputValue value) {
+        yaw = value.Get<float>();
+    }
+
+    private void OnPitchNRoll(InputValue value) {
+        pitchNRoll = value.Get<Vector2>();
     }
 }

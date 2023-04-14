@@ -9,17 +9,23 @@ public class QuadcopterMovement : MonoBehaviour
     [SerializeField] private List<GameObject> propellers = new List<GameObject>();
 
     private void Start() {
-        rb = gameObject.GetComponent<Rigidbody>();
-        input = gameObject.GetComponent<InputManager>();
+        rb = GetComponent<Rigidbody>();
+        input = GetComponent<InputManager>();
     }
 
     private void FixedUpdate() {
         foreach (GameObject propeller in propellers) {
             Propeller propellerScript = propeller.GetComponent<Propeller>();
 
-            Vector3 propellerVector = propellerScript.GetPropellerVector(rb, input);
+            float propellerPower = propellerScript.GetPropellerVector(rb, input);
+            Vector3 propellerVector = new Vector3(transform.rotation.x, propellerPower, transform.rotation.z);
 
-            rb.AddForce(propellerVector, ForceMode.Force);
+            rb.AddRelativeForce(propellerVector, ForceMode.Force);
         }
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z) + rb.centerOfMass, 0.25f);
     }
 }
