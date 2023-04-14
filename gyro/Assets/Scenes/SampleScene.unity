@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 900216663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e22ba19d305f42428140683e07f954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &900216665
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 912294143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e22ba19d305f42428140683e07f954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &912294145
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729659931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e22ba19d305f42428140683e07f954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &1729659933
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2039441277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e22ba19d305f42428140683e07f954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &2039441279
@@ -999,12 +999,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2083894147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 550ed4d1f78dbd34a88f33305450cb1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 98f7bf0e27d4f2841828c97a04c60129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gravityVector: {x: 0, y: -10, z: 0}
-  propellers:
-  - {fileID: 1729659931}
-  - {fileID: 912294143}
-  - {fileID: 2039441277}
-  - {fileID: 900216663}
+  propellers: []
