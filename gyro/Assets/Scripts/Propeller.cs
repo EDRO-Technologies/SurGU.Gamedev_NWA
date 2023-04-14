@@ -8,7 +8,7 @@ public class Propeller : MonoBehaviour
 
     public Vector3 GetPropellerVector(Rigidbody rb, InputManager input) {
         Vector3 propellerVector = Vector3.zero;
-        propellerVector = transform.up * ((rb.mass * Physics.gravity.magnitude) + (input.Pedals * maxPower)) / 4
+        propellerVector = transform.up * ((rb.mass * Physics.gravity.magnitude) + (input.Pedals * maxPower)) / 4;
 
         return propellerVector;
     }
