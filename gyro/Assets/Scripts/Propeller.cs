@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Propeller : MonoBehaviour
 {
-    public Vector3 GetPropellerVector() {
-        Vector3 propellerVector = new Vector3(1, 2.5f, 0);
+    [SerializeField] private float maxPower = 4f;
 
-        if (gameObject.name == "FrontLeftPropeller" || gameObject.name == "BackRightPropeller") {
-            propellerVector.x = -1;
-            // propellerVector.y = 4f;
-        }
-
-        // тут чет вычисляем
+    public Vector3 GetPropellerVector(Rigidbody rb, InputManager input) {
+        Vector3 propellerVector = Vector3.zero;
+        propellerVector = transform.up * ((rb.mass * Physics.gravity.magnitude) + (input.Pedals * maxPower)) / 4
 
         return propellerVector;
     }
