@@ -8,8 +8,8 @@ public class Propeller : MonoBehaviour
         Vector3 propellerVector = new Vector3(1, 2.5f, 0);
 
         if (gameObject.name == "FrontLeftPropeller" || gameObject.name == "BackRightPropeller") {
-            //propellerVector.x = -1;
-            //propellerVector.y = 4f;
+            propellerVector.x = -1;
+            // propellerVector.y = 4f;
         }
 
         // тут чет вычисляем
