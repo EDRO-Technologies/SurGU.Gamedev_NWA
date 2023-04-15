@@ -30,10 +30,7 @@ public class PIDController : MonoBehaviour
 	[SerializeField]  private PID yawPID;
 
 	private InputManager input;
-	[SerializeField] private Transform bodyTransform;
-
-	public bool yes = false;
-
+	[SerializeField] private Transform bodyTransform; 
 
     private void Awake()
     {
@@ -43,10 +40,6 @@ public class PIDController : MonoBehaviour
     void FixedUpdate()
 	{
 		Stabilize(input);
-
-		if (yes) {
-			targetThrottle += Time.deltaTime;
-        }
 	}
 
 	private void Stabilize(InputManager input)
@@ -64,10 +57,11 @@ public class PIDController : MonoBehaviour
 		pitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
 		targetPitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
 		yaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
-		targetYaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
+		targetYaw -= Mathf.Ceil(Mathf.Floor((yaw) / 180) / 2) * 360;
 		roll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
-		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
+		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360; 
 
+		//Debug.Log(targetYaw - yaw);
 
 		float throttleForce = throttlePID.CalculateForce(throttle, targetThrottle);
 		throttleForce = Mathf.Clamp(throttleForce, -throttleMax, throttleMax);
@@ -90,14 +84,14 @@ public class PIDController : MonoBehaviour
 		BL_propPower -= rollForce;
 		BR_propPower += rollForce;
 
-		float yawForce = yawPID.CalculateForce(yaw, targetYaw);
+		float yawForce = -yawPID.CalculateForce(yaw, targetYaw);
 		yawForce = Mathf.Clamp(yawForce, -yawMax, yawMax);
 		FL_propPower -= yawForce;
 		FR_propPower += yawForce;
 		BL_propPower += yawForce;
 		BR_propPower -= yawForce;
 
-		Debug.Log("1. " + throttleForce + " 2. " + pitchForce + " 3. " + rollForce + " 4. " + yawForce);
+		// Debug.Log("1. " + throttleForce + " 2. " + pitchForce + " 3. " + rollForce + " 4. " + yawForce);
 
 		FL_propellerScript.rpm = FL_propPower;
 		FR_propellerScript.rpm = FR_propPower;
