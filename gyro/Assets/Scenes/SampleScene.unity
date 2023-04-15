@@ -856,7 +856,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!1 &330585543
 GameObject:
@@ -940,7 +940,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 14.98, y: 0, z: 0}
 --- !u!1 &344268257
 GameObject:
@@ -1605,7 +1605,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &468270361
 GameObject:
@@ -2394,9 +2394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 4
   torquePower: 4
-  torqueDirection: 0
+  torqueDirection: -1
   rpm: 0
 --- !u!65 &900216665
 BoxCollider:
@@ -2541,9 +2540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 4
   torquePower: 4
-  torqueDirection: 0
+  torqueDirection: 1
   rpm: 0
 --- !u!65 &912294145
 BoxCollider:
@@ -2784,7 +2782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0a6a88297633d499b45fb152fc5c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 5
+  timeValue: 999
   timerText: {fileID: 1196944810}
   pauseMenu: {fileID: 2027598397}
 --- !u!114 &1196944810
@@ -3233,9 +3231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 4
   torquePower: 4
-  torqueDirection: 0
+  torqueDirection: -1
   rpm: 0
 --- !u!65 &1729659933
 BoxCollider:
@@ -3307,7 +3304,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729659931}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0.2, z: 0.5}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
@@ -3635,7 +3632,7 @@ RectTransform:
   - {fileID: 1183429383}
   - {fileID: 628006781}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3692,9 +3689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd8ea1cb9a0ae4429dc4cd31a5b2654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 4
   torquePower: 4
-  torqueDirection: 0
+  torqueDirection: 1
   rpm: 0
 --- !u!65 &2039441279
 BoxCollider:
@@ -3816,6 +3812,7 @@ GameObject:
   - component: {fileID: 2083894150}
   - component: {fileID: 2083894154}
   - component: {fileID: 2083894153}
+  - component: {fileID: 2083894155}
   m_Layer: 0
   m_Name: Quadcopter
   m_TagString: Untagged
@@ -3831,7 +3828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083894147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3885,6 +3882,49 @@ MonoBehaviour:
   m_DefaultActionMap: Drone
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2083894155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083894147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f03cc89dfb5c14b9cbfdbadd1565dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FR_propellerScript: {fileID: 1729659932}
+  FL_propellerScript: {fileID: 2039441278}
+  BR_propellerScript: {fileID: 912294144}
+  BL_propellerScript: {fileID: 900216664}
+  targetThrottle: 1.07
+  targetPitch: 0
+  targetRoll: 0
+  targetYaw: 0
+  throttleMax: 30
+  pitchMax: 4
+  rollMax: 4
+  yawMax: 4
+  throttle: 0
+  throttlePID:
+    P: 100
+    I: 0
+    D: 20
+  pitchPID:
+    P: 1
+    I: 0
+    D: 1
+  rollPID:
+    P: 1
+    I: 0
+    D: 1
+  yawPID:
+    P: 1
+    I: 0
+    D: 1
+  bodyTransform: {fileID: 327025953}
+  yes: 0
 --- !u!1 &2094394297
 GameObject:
   m_ObjectHideFlags: 0

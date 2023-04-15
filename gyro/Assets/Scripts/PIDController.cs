@@ -4,92 +4,100 @@ using UnityEngine;
 
 public class PIDController : MonoBehaviour
 {
-	[SerializeField] private GameObject FR_propeller;
-	[SerializeField] private GameObject FL_propeller;
-	[SerializeField] private GameObject BR_propeller;
-	[SerializeField] private GameObject BL_propeller;
+	[SerializeField] private Propeller FR_propellerScript;
+	[SerializeField] private Propeller FL_propellerScript;
+	[SerializeField] private Propeller BR_propellerScript;
+	[SerializeField] private Propeller BL_propellerScript;
 
-	private Propeller FR_propellerScript;
-	private Propeller FL_propellerScript;
-	private Propeller BR_propellerScript;
-	private Propeller BL_propellerScript;
-
-	private Rigidbody FR_propellerRb;
-	private Rigidbody FL_propellerRb;
-	private Rigidbody BR_propellerRb;
-	private Rigidbody BL_propellerRb;
-
+	[SerializeField] private float targetThrottle;
 	[SerializeField] private float targetPitch;
 	[SerializeField] private float targetRoll;
 	[SerializeField] private float targetYaw;
 
+	[SerializeField] private float throttleMax = 0.6f;
 	[SerializeField] private float pitchMax = 0.6f;
-
-	[SerializeField] private float maxPower = 4f;
+	[SerializeField] private float rollMax = 0.6f;
+	[SerializeField] private float yawMax = 0.6f;
 
 	private float pitch;
 	private float roll;
 	private float yaw;
 	public float throttle;
 
-	private PID pitchPID = new PID(100, 0, 20);
-	private PID rollPID = new PID(100, 0, 20);
-	private PID yawPID = new PID(50, 0, 50);
+	[SerializeField]  private PID throttlePID;
+	[SerializeField]  private PID pitchPID;
+	[SerializeField]  private PID rollPID;
+	[SerializeField]  private PID yawPID;
 
 	private InputManager input;
+	[SerializeField] private Transform bodyTransform;
+
+	public bool yes = false;
 
 
     private void Awake()
     {
-		FR_propellerScript = FR_propeller.GetComponent<Propeller>();
-		FL_propellerScript = FL_propeller.GetComponent<Propeller>();
-		BR_propellerScript = BR_propeller.GetComponent<Propeller>();
-		BL_propellerScript = BL_propeller.GetComponent<Propeller>();
-
-		FR_propellerRb = FR_propeller.GetComponent<Rigidbody>();
-		FL_propellerRb = FL_propeller.GetComponent<Rigidbody>();
-		BR_propellerRb = BR_propeller.GetComponent<Rigidbody>();
-		BL_propellerRb = BL_propeller.GetComponent<Rigidbody>();
-
 		input = GetComponent<InputManager>();
 	}
 
     void FixedUpdate()
 	{
-		GetRotation();
 		Stabilize(input);
-	}
 
-	private void GetRotation()
-	{
-		Vector3 rotation = GetComponent<Transform>().rotation.eulerAngles;
-		pitch = rotation.x;
-		yaw = rotation.y;
-		roll = rotation.z;
+		if (yes) {
+			targetThrottle += Time.deltaTime;
+        }
 	}
 
 	private void Stabilize(InputManager input)
 	{
-		float pitchDiff = targetPitch - pitch;
-		float rollDiff = targetRoll - roll;
-		float yawDiff = targetYaw - yaw;
+		pitch = bodyTransform.eulerAngles.x;
+		yaw = bodyTransform.eulerAngles.y;
+		roll = bodyTransform.eulerAngles.z;
+		throttle = bodyTransform.transform.position.y;
 
-		float FL_propPower = throttle;
-		float FR_propPower = throttle;
-		float BL_propPower = throttle;
-		float BR_propPower = throttle;
+		float FL_propPower = 1;
+		float FR_propPower = 1;
+		float BL_propPower = 1;
+		float BR_propPower = 1;
 
-		FL_propPower = ((FL_propellerRb.mass * 5 * Physics.gravity.magnitude) + (input.Throttle * maxPower)) / 4;
-		FR_propPower = ((FR_propellerRb.mass * 5 * Physics.gravity.magnitude) + (input.Throttle * maxPower)) / 4;
-		BL_propPower = ((BL_propellerRb.mass * 5 * Physics.gravity.magnitude) + (input.Throttle * maxPower)) / 4;
-		BR_propPower = ((BR_propellerRb.mass * 5 * Physics.gravity.magnitude) + (input.Throttle * maxPower)) / 4;
+		pitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
+		targetPitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
+		yaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
+		targetYaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
+		roll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
+		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
 
-		float pitchForce = pitchPID.CalculateForce(0, targetPitch / 180f);
+
+		float throttleForce = throttlePID.CalculateForce(throttle, targetThrottle);
+		throttleForce = Mathf.Clamp(throttleForce, -throttleMax, throttleMax);
+		FL_propPower += throttleForce;
+		FR_propPower += throttleForce;
+		BL_propPower += throttleForce;
+		BR_propPower += throttleForce;
+
+		float pitchForce = pitchPID.CalculateForce(pitch, targetPitch);
 		pitchForce = Mathf.Clamp(pitchForce, -pitchMax, pitchMax);
 		FL_propPower -= pitchForce;
 		FR_propPower -= pitchForce;
 		BL_propPower += pitchForce;
 		BR_propPower += pitchForce;
+
+		float rollForce = rollPID.CalculateForce(roll, targetRoll);
+		rollForce = Mathf.Clamp(rollForce, -rollMax, rollMax);
+		FL_propPower -= rollForce;
+		FR_propPower += rollForce;
+		BL_propPower -= rollForce;
+		BR_propPower += rollForce;
+
+		float yawForce = yawPID.CalculateForce(yaw, targetYaw);
+		yawForce = Mathf.Clamp(yawForce, -yawMax, yawMax);
+		FL_propPower -= yawForce;
+		FR_propPower += yawForce;
+		BL_propPower += yawForce;
+		BR_propPower -= yawForce;
+
+		Debug.Log("1. " + throttleForce + " 2. " + pitchForce + " 3. " + rollForce + " 4. " + yawForce);
 
 		FL_propellerScript.rpm = FL_propPower;
 		FR_propellerScript.rpm = FR_propPower;
