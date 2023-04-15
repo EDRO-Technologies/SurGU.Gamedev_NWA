@@ -15,8 +15,6 @@ public class QuadcopterMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         input = GetComponent<InputManager>();
     }
-
-    private void FixedUpdate() {
-
-    }
 }
+
+
