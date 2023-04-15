@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PID : MonoBehaviour
+public class PID
 {
 	private float P;
 	private float I;
@@ -18,17 +18,16 @@ public class PID : MonoBehaviour
 		this.D = D;
 	}
 
-	public float calculateForce(float current, float target)
+	public float CalculateForce(float current, float target)
 	{
-
 		float dt = Time.fixedDeltaTime;
 
 		float err = target - current;
-		this.sumErr += err;
+		sumErr += err;
 
-		float force = this.P * err + this.I * this.sumErr * dt + this.D * (err - this.prevErr) / dt;
+		float force = P * err + I * sumErr * dt + D * (err - prevErr) / dt;
 
-		this.prevErr = err;
+		prevErr = err;
 		return force;
 	}
 }
