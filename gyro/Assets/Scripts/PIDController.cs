@@ -19,6 +19,10 @@ public class PIDController : MonoBehaviour
 	[SerializeField] private float rollMax = 0.6f;
 	[SerializeField] private float yawMax = 0.6f;
 
+	[SerializeField] private float pitchLimit = 30;
+	[SerializeField] private float rollLimit = 30;
+
+
 	private float pitch;
 	private float roll;
 	private float yaw;
@@ -54,12 +58,19 @@ public class PIDController : MonoBehaviour
 		float BL_propPower = 1;
 		float BR_propPower = 1;
 
+		targetPitch = pitchLimit * input.PitchNRoll.y;
+		targetRoll = -rollLimit * input.PitchNRoll.x;
+		targetYaw += input.Yaw;
+		targetThrottle += input.Throttle / 100f;
+
 		pitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
 		targetPitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
 		yaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
 		targetYaw -= Mathf.Ceil(Mathf.Floor((yaw) / 180) / 2) * 360;
 		roll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
 		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360; 
+
+		
 
 		//Debug.Log(targetYaw - yaw);
 
