@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FishNet.Object;
-using FishNet.Connection;
 
-public class PIDController : NetworkBehaviour
+public class PIDController : MonoBehaviour
 {
 	[SerializeField] private Propeller FR_propellerScript;
 	[SerializeField] private Propeller FL_propellerScript;
@@ -37,14 +35,6 @@ public class PIDController : NetworkBehaviour
 
 	private InputManager input;
 	[SerializeField] private Transform bodyTransform;
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-		if (!base.IsOwner) {
-			GetComponent<PIDController>().enabled = false;
-		}
-    }
 
     private void Awake()
     {

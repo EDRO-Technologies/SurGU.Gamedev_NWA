@@ -14,8 +14,8 @@ public class EventsSystem : MonoBehaviour
         public int disasterId;
     }
 
-    private float eventTimer = 3f;
-    private float procTimer = 3f;
+    private float eventTimer = 300f;
+    private float procTimer = 300f;
 
     void Update()
     {

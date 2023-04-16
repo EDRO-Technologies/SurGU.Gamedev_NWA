@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using FishNet.Object;
-using FishNet.Connection;
 
-public class InputManager : NetworkBehaviour
+public class InputManager : MonoBehaviour
 {
     private float throttle;
     private float yaw;
@@ -14,15 +12,6 @@ public class InputManager : NetworkBehaviour
     public float Throttle { get => throttle; }
     public float Yaw { get => yaw; }
     public Vector2 PitchNRoll { get => pitchNRoll; }
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        if (!base.IsOwner)
-        {
-            GetComponent<InputManager>().enabled = false;
-        }
-    }
 
     private void OnThrottle(InputValue value) {
         throttle = value.Get<float>();

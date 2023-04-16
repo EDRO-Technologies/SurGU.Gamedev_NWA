@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FishNet.Object;
-using FishNet.Connection;
 
-public class Propeller : NetworkBehaviour
+public class Propeller : MonoBehaviour
 {   
     [SerializeField] private float torquePower = 4f;
     [SerializeField] private float forcePower = 4f;
@@ -14,15 +12,6 @@ public class Propeller : NetworkBehaviour
 
     private Rigidbody rb;
     [SerializeField] private Rigidbody bodyRb;
-
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        if (!base.IsOwner)
-        {
-            GetComponent<Propeller>().enabled = false;
-        }
-    }
 
     private void Awake() {
         rb = GetComponent<Rigidbody>();
