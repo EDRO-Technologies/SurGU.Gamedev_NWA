@@ -43,6 +43,7 @@ public class Timer : MonoBehaviour
 /*
 if timeValue % 30 = 0
 {
+    
     eventscript.balka.fire
     
 }
