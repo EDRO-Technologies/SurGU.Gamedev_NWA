@@ -12,16 +12,15 @@ public class EventsSystem : MonoBehaviour
     public event EventHandler<TimerEventArgs> onTimeExpired;    
     public class TimerEventArgs : EventArgs
     {
-        public int disasterId;
-        public int balkaId;
+        public int objId;
     }
 
-    private float eventTimer = 3f;
-    private float procTimer = 3f;
+    private float eventTimer = 5f;
+    private float procTimer = 5f;
 
     void Update()
     {
-        int balkaId = UnityEngine.Random.Range(0, balkas.Count - 1);
+        int balkaId = UnityEngine.Random.Range(0, balkas.Count);
         int disasterId = UnityEngine.Random.Range(0, 2);
         eventTimer -= Time.deltaTime;
         procTimer -= Time.deltaTime;
@@ -31,7 +30,7 @@ public class EventsSystem : MonoBehaviour
         if (eventTimer == 0 || procTimer == 0)
         {
             if (UnityEngine.Random.Range(0, 100) >= 50 || procTimer == 0) {
-                onTimeExpired?.Invoke(this, new TimerEventArgs { disasterId = disasterId, balkaId = balkaId });
+                onTimeExpired?.Invoke(this, new TimerEventArgs { objId = 4 });
                 procTimer = procDuration;
                 eventTimer = timerDuration;
             }

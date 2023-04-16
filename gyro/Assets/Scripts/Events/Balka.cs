@@ -8,8 +8,16 @@ public class Balka : MonoBehaviour
 {
     [SerializeField] EventsSystem eventSystem;
 
-    [SerializeField] public ParticleSystem firePrefab;
+    public ParticleSystem fireParticles;
     [SerializeField] private int balkaId;
+
+    [SerializeField] public GameObject balkaHud;
+    [SerializeField] public GameObject balkaHudHolder;
+
+    [SerializeField] public Animator snapAnim;
+    [SerializeField] public AudioSource snapSound;
+
+    [SerializeField] public Vector3 qrOffset;
 
     public float disasterDuration = 60f;
 
@@ -23,6 +31,7 @@ public class Balka : MonoBehaviour
     private void Start()
     {
         eventSystem.onTimeExpired += EventsSystem_onTimeExpired;
+        fireParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Update()
@@ -47,16 +56,29 @@ public class Balka : MonoBehaviour
 
     private void EventsSystem_onTimeExpired(object sender, EventsSystem.TimerEventArgs e) 
     {
-        if (balkaId != e.balkaId) return;
+        if (balkaId != e.objId) return;
+        Debug.Log(e.objId);
 
-        switch(e.disasterId) {
-            case 1:
+        switch (e.objId) {
             case 0:
+            case 1:
+            case 2:
                 isDisasterActive = true;
                 disasterTime = disasterDuration;
-                ParticleSystem fireParticles = Instantiate(firePrefab);
-                fireParticles.transform.position = transform.position;
                 fireParticles.Play();
+                balkaHud.transform.SetParent(balkaHudHolder.transform, false); 
+                balkaHud.GetComponent<TMP_Text>().text = "Fire Alarm - 60s";
+                balkaHud.SetActive(true);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                isDisasterActive = true;
+                disasterTime = disasterDuration;
+                transform.position += qrOffset;
+                balkaHud.transform.SetParent(balkaHudHolder.transform, false);
+                balkaHud.GetComponent<TMP_Text>().text = $"Identify QR {e.objId - 2} - 60s";
+                balkaHud.SetActive(true);
                 break;
         }
     }

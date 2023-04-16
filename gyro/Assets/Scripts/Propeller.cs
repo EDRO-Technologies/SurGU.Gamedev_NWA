@@ -30,10 +30,9 @@ public class Propeller : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.tag != "Balka")
-        {
-            isBroken = 0;
-            GetComponent<MeshRenderer>().material = brokenMat;
-        }
+        if (other.tag == "Balka" || other.tag == "QR") return;
+
+        isBroken = 0;
+        GetComponent<MeshRenderer>().material = brokenMat;
     }
 }
