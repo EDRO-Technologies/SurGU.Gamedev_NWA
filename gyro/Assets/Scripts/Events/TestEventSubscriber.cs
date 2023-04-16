@@ -1,18 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestEventSubscriber : MonoBehaviour
+public class RealEventSystemSubscriber : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TestEvent testEvent;
+    private void Start()
     {
-        
+        testEvent.onTimeExpired += TestEvent_onTimeExpired;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TestEvent_onTimeExpired (object sender, EventArgs e) 
     {
-        
+        Debug.Log("Event started");
     }
+
 }

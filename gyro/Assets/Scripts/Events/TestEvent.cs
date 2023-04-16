@@ -3,28 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestItem : MonoBehaviour
+public class TestEvent : MonoBehaviour
 {
     public event EventHandler onTimeExpired;
-    public float timerEvent;
-    [SerializeField] Timer timer;  
-    void Start()
-    {
-        onTimeExpired += _onTimeExpired;
-    }
-
-    private void _onTimeExpired(object sender, EventArgs e)
-    {
-        
-    }
-
+    private float timerEvent = 30;
 
     void Update()
     {
-        timerEvent = timer.timeValue;
-        if (timerEvent % 30 == 0)
+        timerEvent -= Time.deltaTime;
+        timerEvent = Mathf.Max(0,timerEvent);
+
+        if (timerEvent == 0)
         {
-            onTimeExpired?.Invoke(this, EventArgs.Empty);
+            if (UnityEngine.Random.Range(0, 100) >= 50) {
+                onTimeExpired?.Invoke(this, EventArgs.Empty);
+            }
+            timerEvent = 30;
         }
     }
 }
