@@ -16,14 +16,16 @@ public class TasksUIEvent : MonoBehaviour
 
     private void EventsSystem_onTimeExpired(object sender, EventsSystem.TimerEventArgs e)
     {
+        GameObject eventText = Instantiate(eventTextPrefab);
         switch (e.disasterId)
         {
             case 0:
-                GameObject eventText = Instantiate(eventTextPrefab);
                 eventText.transform.parent = eventTextsHolder.transform;
-                eventText.GetComponent<TMP_Text>().text = "Extinguish fire!";
+                eventText.GetComponent<TMP_Text>().text = "Fire Alarm - 60s";
                 break;
             case 1:
+                eventText.transform.parent = eventTextsHolder.transform;
+                eventText.GetComponent<TMP_Text>().text = "Scan the Mark - 60s";
                 break;
         }
     }
