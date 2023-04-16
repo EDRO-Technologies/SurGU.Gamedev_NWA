@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 
 public class Timer : MonoBehaviour
-{
-    
+{   
     public float timeValue = 90;
     public Text timerText;
     public PauseMenu pauseMenu;
-        void Update()
+
+    private void Update()
     {
         if(timeValue > 0)
         {
@@ -23,11 +23,9 @@ public class Timer : MonoBehaviour
         }
 
         DisplayTime(timeValue);
-
     }
 
-
-    void DisplayTime(float timeToDisplay)
+    private void DisplayTime(float timeToDisplay)
     {
         if(timeToDisplay < 0)
         {
@@ -40,11 +38,3 @@ public class Timer : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
-/*
-if timeValue % 30 = 0
-{
-    
-    eventscript.balka.fire
-    
-}
-*/

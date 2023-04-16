@@ -14,7 +14,7 @@ public class NetworkSetup : NetworkBehaviour
         if (base.IsOwner)
         {
             Camera cam = Camera.main;
-            cam.transform.position = new Vector3(body.position.x, body.position.y + 1, body.position.z - 3.15f);
+            cam.transform.position = new Vector3(body.position.x, body.position.y + 0.5f, body.position.z - 4.15f);
             cam.transform.SetParent(body);
 
             UIControllers uiControls = GameObject.Find("ControllerCanvas").GetComponent<UIControllers>();
