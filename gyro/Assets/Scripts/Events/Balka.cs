@@ -8,15 +8,15 @@ public class Balka : MonoBehaviour
 {
     [SerializeField] EventsSystem eventSystem;
 
-    [SerializeField] ParticleSystem firePrefab;
+    [SerializeField] public ParticleSystem firePrefab;
 
-    [SerializeField] private float disasterDuration = 20f;
+    public float disasterDuration = 20f;
 
-    [SerializeField] private GameObject endGameScreen;
-    [SerializeField] private TMP_Text endGameText;
-    [SerializeField] private GameObject eventListUI;
+    [SerializeField] public GameObject endGameScreen;
+    [SerializeField] public TMP_Text endGameText;
+    [SerializeField] public GameObject eventListUI;
     private float disasterTime;
-    private bool isDisasterActive = false;
+    public bool isDisasterActive = false;
 
     private void Start()
     {
@@ -40,9 +40,8 @@ public class Balka : MonoBehaviour
 
     private void EventsSystem_onTimeExpired(object sender, EventsSystem.TimerEventArgs e) 
     {
-        Debug.Log(e.disasterId);
-
         switch(e.disasterId) {
+            case 1:
             case 0:
                 isDisasterActive = true;
                 disasterTime = disasterDuration;
@@ -51,9 +50,6 @@ public class Balka : MonoBehaviour
 
                 fireParticles.Play();
                 Debug.Log("ASDQWE");
-                break;
-            case 1:
-                Debug.Log("GOOFY AHH");
                 break;
         }
     }

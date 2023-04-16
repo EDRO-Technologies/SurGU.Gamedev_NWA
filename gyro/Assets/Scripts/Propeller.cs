@@ -13,6 +13,8 @@ public class Propeller : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Rigidbody bodyRb;
 
+    [SerializeField] private Material brokenMat;
+
     private void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -28,6 +30,10 @@ public class Propeller : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        isBroken = 0;
+        if (other.tag != "Balka")
+        {
+            isBroken = 0;
+            GetComponent<MeshRenderer>().material = brokenMat;
+        }
     }
 }
