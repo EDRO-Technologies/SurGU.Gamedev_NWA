@@ -30,7 +30,7 @@ public class EventsSystem : MonoBehaviour
         if (eventTimer == 0 || procTimer == 0)
         {
             if (UnityEngine.Random.Range(0, 100) >= 50 || procTimer == 0) {
-                onTimeExpired?.Invoke(this, new TimerEventArgs { objId = 4 });
+                onTimeExpired?.Invoke(this, new TimerEventArgs { objId = balkaId });
                 procTimer = procDuration;
                 eventTimer = timerDuration;
             }
