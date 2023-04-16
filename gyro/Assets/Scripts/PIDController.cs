@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FishNet.Object;
+using FishNet.Connection;
 
-public class PIDController : MonoBehaviour
+public class PIDController : NetworkBehaviour
 {
 	[SerializeField] private Propeller FR_propellerScript;
 	[SerializeField] private Propeller FL_propellerScript;
@@ -19,9 +21,9 @@ public class PIDController : MonoBehaviour
 	[SerializeField] private float rollMax = 0.6f;
 	[SerializeField] private float yawMax = 0.6f;
 
-	[SerializeField] private float pitchLimit = 30;
-	[SerializeField] private float rollLimit = 30;
-
+	public float pitchLimit;
+	public float rollLimit;
+	public float throttleLimit;
 
 	private float pitch;
 	private float roll;
@@ -34,7 +36,15 @@ public class PIDController : MonoBehaviour
 	[SerializeField]  private PID yawPID;
 
 	private InputManager input;
-	[SerializeField] private Transform bodyTransform; 
+	[SerializeField] private Transform bodyTransform;
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+		if (!base.IsOwner) {
+			GetComponent<PIDController>().enabled = false;
+		}
+    }
 
     private void Awake()
     {
@@ -61,18 +71,16 @@ public class PIDController : MonoBehaviour
 		targetPitch = pitchLimit * input.PitchNRoll.y;
 		targetRoll = -rollLimit * input.PitchNRoll.x;
 		targetYaw += input.Yaw;
-		targetThrottle += input.Throttle / 100f;
+		targetThrottle += input.Throttle / 100f * throttleLimit;
 
 		pitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
 		targetPitch -= Mathf.Ceil(Mathf.Floor(pitch / 180) / 2) * 360;
-		yaw -= Mathf.Ceil(Mathf.Floor(yaw / 180) / 2) * 360;
-		targetYaw -= Mathf.Ceil(Mathf.Floor((yaw) / 180) / 2) * 360;
+
 		roll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
-		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360; 
+		targetRoll -= Mathf.Ceil(Mathf.Floor(roll / 180) / 2) * 360;
 
-		
-
-		//Debug.Log(targetYaw - yaw);
+		yaw = Mathf.LerpAngle(yaw, targetYaw, 0);
+		targetYaw = Mathf.LerpAngle(yaw, targetYaw, 1);
 
 		float throttleForce = throttlePID.CalculateForce(throttle, targetThrottle);
 		throttleForce = Mathf.Clamp(throttleForce, -throttleMax, throttleMax);
