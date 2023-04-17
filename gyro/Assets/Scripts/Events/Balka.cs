@@ -66,8 +66,8 @@ public class Balka : MonoBehaviour
                 isDisasterActive = true;
                 disasterTime = disasterDuration;
                 fireParticles.Play();
-                balkaHud.transform.SetParent(balkaHudHolder.transform, false); 
-                balkaHud.GetComponent<TMP_Text>().text = "Fire Alarm - 60s";
+                balkaHud.transform.SetParent(balkaHudHolder.transform, false);
+                balkaHud.GetComponent<TMP_Text>().text = "Fire Alarm - 50s";
                 balkaHud.SetActive(true);
                 break;
             case 3:

@@ -38,7 +38,7 @@ public class TriggerDetector : MonoBehaviour
                 balka.fireParticles.Stop();
                 balka.isDisasterActive = false;
                 TooltipControl(false);
-                balka.balkaHud.transform.SetParent(balka.transform);
+                balka.balkaHud.transform.SetParent(balka.transform, false);
             }
         } else if (other.tag == "QR" && other.GetComponent<Balka>().isDisasterActive) {
             TooltipControl(true, "Press F to scan");
@@ -49,7 +49,7 @@ public class TriggerDetector : MonoBehaviour
                 balka.isDisasterActive = false;
                 balka.transform.position -= balka.qrOffset;
                 TooltipControl(false);
-                balka.balkaHud.transform.SetParent(balka.transform);
+                balka.balkaHud.transform.SetParent(balka.transform, false);
             }
         }
     }
