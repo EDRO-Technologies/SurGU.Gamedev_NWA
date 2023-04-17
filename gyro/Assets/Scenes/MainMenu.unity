@@ -487,7 +487,7 @@ AudioSource:
   m_GameObject: {fileID: 142887036}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6d0133fdd0647e1488a121cc86dfc426, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'So far there only 2 tasks you will face: fire extinguish and scanning
+  m_text: 'So far there only 2 tasks you will face: extinguishing fire and scanning
     a mark.    '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
@@ -1163,7 +1163,7 @@ AudioSource:
   m_GameObject: {fileID: 358650635}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6d0133fdd0647e1488a121cc86dfc426, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You have to survive for 3 minutes while completing emerging tasks.    '
+  m_text: 'You have to survive for 5 minutes while completing emerging tasks.    '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
@@ -1797,7 +1797,7 @@ AudioSource:
   m_GameObject: {fileID: 450979225}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6d0133fdd0647e1488a121cc86dfc426, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2073,7 +2073,7 @@ AudioSource:
   m_GameObject: {fileID: 483575766}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6d0133fdd0647e1488a121cc86dfc426, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -2372,7 +2372,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Z/C - Yaw
+  m_text: J/L - Yaw
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Q/E - Throttle
+  m_text: I/K - Throttle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: b93be74e22c50ad48bdd3fe44ec34d3a, type: 2}
@@ -3127,7 +3127,7 @@ AudioSource:
   m_GameObject: {fileID: 1362689549}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 6d0133fdd0647e1488a121cc86dfc426, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -3780,6 +3780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1525272527}
   - component: {fileID: 1525272528}
+  - component: {fileID: 1525272529}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -3857,10 +3858,35 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1525272529}
+        m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
+        m_MethodName: OnVolumeChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1525272529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525272526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dad30e914205b54cb7099ceb2705d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 1525272528}
 --- !u!1 &1535290438
 GameObject:
   m_ObjectHideFlags: 0
