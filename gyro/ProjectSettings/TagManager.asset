@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Balka
   - QR
+  - Arrow
   layers:
   - Default
   - TransparentFX
