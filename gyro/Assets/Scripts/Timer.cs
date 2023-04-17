@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Timer : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class Timer : MonoBehaviour
     public float timeValue = 90;
     public Text timerText;
     public PauseMenu pauseMenu;
-        void Update()
+    public TMP_Text endGameText;
+
+    void Update()
     {
         if(timeValue > 0)
         {
@@ -18,14 +21,13 @@ public class Timer : MonoBehaviour
         } else
         {
             timeValue = 0;
+            endGameText.text = "You've won!";
             pauseMenu.endGameUI.SetActive(true);
             pauseMenu.eventListUI.SetActive(false);
         }
 
         DisplayTime(timeValue);
-
     }
-
 
     void DisplayTime(float timeToDisplay)
     {
@@ -40,11 +42,3 @@ public class Timer : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
-/*
-if timeValue % 30 = 0
-{
-    
-    eventscript.balka.fire
-    
-}
-*/

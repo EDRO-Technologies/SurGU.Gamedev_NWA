@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FishNet.Object;
-using FishNet.Connection;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIControllers : NetworkBehaviour
+public class UIControllers : MonoBehaviour
 {
     public PIDController playerController;
 
@@ -26,7 +24,6 @@ public class UIControllers : NetworkBehaviour
 
     private void Update()
     {
-        if (playerController != null) {
             playerController.pitchLimit = pitchSlider.value;
             playerController.rollLimit = rollSlider.value;
             playerController.throttleLimit = throttleSlider.value;
@@ -34,6 +31,5 @@ public class UIControllers : NetworkBehaviour
             pitchText.text = $"{pitchSlider.value}°";
             rollText.text = $"{rollSlider.value}°";
             throttleText.text = $"{Mathf.Round(throttleSlider.value * 5)}%";
-        }
     }
 }
