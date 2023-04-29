@@ -43,6 +43,8 @@ Material:
     - _Color_Treshold: 0.1
     - _Normal_Treshold: 0.2
     - _OVERLAY: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
     - _Outline_Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
